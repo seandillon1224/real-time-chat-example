@@ -1,0 +1,16 @@
+.chatBox {
+    display: flex;
+    flex-direction: row;
+}
+
+.chatBubbleRow {
+    display: flex;
+    width: 100%;
+    padding: 2rem;
+    flex-direction: column;
+}
+
+.genericBubble {
+    padding: 5px 15px;
+    border-radius: 30%;
+}
