@@ -10,4 +10,4 @@ const MESSAGES = gql`
 }
 `;
 
-export { MESSAGES };
+export default MESSAGES;

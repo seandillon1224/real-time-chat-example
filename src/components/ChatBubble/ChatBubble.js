@@ -1,13 +1,16 @@
 import * as React from "react";
-import css from "./ChatBubble.module.css";
-import cn from "classnames";
 import { Context } from "../../pages";
+import StyledChatBubble from "./StyledChatBubble";
 
 const ChatBubble = ({ user, message }) => {
-  const {user: currUser} = React.useContext(Context);
-  const className = user === currUser ? css.right : css.left;
-  return <div className={cn(className, css.message, css.chatBubbleRow)}>
-    <div className={css.chatMessage}>{message}</div></div>;
+  const { user: currUser } = React.useContext(Context);
+  const direction = user === currUser ? "right" : "left";
+  return (
+    <StyledChatBubble direction={direction}>
+      <span>{user}</span>
+      <div className="bubble">{message}</div>
+    </StyledChatBubble>
+  );
 };
 
 export default ChatBubble;

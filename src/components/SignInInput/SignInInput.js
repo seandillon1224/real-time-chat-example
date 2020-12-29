@@ -1,11 +1,19 @@
 import * as React from "react";
-import {Context} from '../../pages/index'
-import css from './SignInInput.module.css'
+import { Context } from "../../pages/index";
+import styled from "styled-components";
+import Input from "../Input";
+import Button from "../Button";
+
+const Container = styled.div`
+  background-color: ${({ theme }) => theme.colors.white};
+  display: flex;
+  flex-direction: column;
+`;
 
 const SignInInput = () => {
-  const {setUser} = React.useContext(Context)
+  const { setUser } = React.useContext(Context);
   const [userInput, setUserInput] = React.useState("");
-  
+
   const createUser = () => {
     if (userInput.length > 3) {
       setUser(userInput);
@@ -14,18 +22,18 @@ const SignInInput = () => {
   };
 
   return (
-    <div className={css.container}>
-      <input
+    <Container>
+      <Input
         placeholder="Enter Name"
         value={userInput}
         onChange={(e) => setUserInput(e.target.value)}
         type="input"
         name="userInput"
       />
-      <button onClick={createUser} type="button">
+      <Button onClick={createUser} type="button">
         SIGN UP
-      </button>
-    </div>
+      </Button>
+    </Container>
   );
 };
 

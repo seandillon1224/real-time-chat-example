@@ -1,5 +1,16 @@
 import Head from "next/head";
-import "../../styles/globals.css";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { theme } from "styles/theme";
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: ${({ theme }) => theme.fontFamily.body};
+    background: ${({theme}) => theme.colors.purple};
+  }
+`;
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -11,7 +22,10 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }

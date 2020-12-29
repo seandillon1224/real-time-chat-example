@@ -1,12 +1,13 @@
 import * as React from "react";
-import css from "./ChatInput.module.css";
 import { MAKE_MESSAGE } from "../../graphql/mutations";
-import { useMutation, gql, useApolloClient } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { Context } from "../../pages";
+import Input from "../Input";
+import Button from "../Button";
 
 const ChatInput = () => {
   const { user } = React.useContext(Context);
-  const [makeMessage, { loading }] = useMutation(MAKE_MESSAGE, {refetchQueries: ["messages"]});
+  const [makeMessage, { loading }] = useMutation(MAKE_MESSAGE);
 
   const [inputVal, setInputVal] = React.useState("");
   const handleInputVal = (e) => setInputVal(e.target.value);
@@ -18,15 +19,14 @@ const ChatInput = () => {
   
   return (
     <>
-      <input
-        className={css.chatInput}
+      <Input
         value={inputVal}
         onChange={handleInputVal}
         name="input"
       />
-      <button type="button" onClick={handleMessage} title="myButton">
+      <Button type="button" onClick={handleMessage} title="myButton">
         SUBMIT{loading && "TING"}
-      </button>
+      </Button>
     </>
   );
 };

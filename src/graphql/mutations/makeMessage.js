@@ -10,4 +10,4 @@ const MAKE_MESSAGE = gql`
   }
 `;
 
-export { MAKE_MESSAGE };
+export default MAKE_MESSAGE
