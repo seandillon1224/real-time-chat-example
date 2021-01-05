@@ -1,13 +1,12 @@
 import { gql } from "apollo-boost";
 
-const MESSAGES = gql`
-  subscription {
-  messages{
-    id
-    content
-    user
+const MESSAGE_ADDED = gql`
+  subscription messageAdded($chatroomId: String!) {
+    messageAdded(chatroomId: $chatroomId) {
+      _id
+      content
+    }
   }
-}
 `;
 
-export default MESSAGES;
+export default MESSAGE_ADDED;

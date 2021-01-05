@@ -1,22 +1,53 @@
 import { useState, createContext } from "react";
 import withApollo from "lib/apollo";
 import { MESSAGES } from "../graphql/subscriptions";
-import { useSubscription } from "@apollo/react-hooks";
+import { useSubscription, useMutation } from "@apollo/react-hooks";
 import SignInInput from "../components/SignInInput/SignInInput";
 import ChatBox from "../components/ChatBox";
 import StyledHome from "../styles/home";
+import { CREATE_USER } from "../graphql/mutations";
+import { login } from "../components/utils/AuthProvider";
+// import { useAuth } from "../components/utils/AuthProvider";
 
 export const Context = createContext({});
 
 function Home() {
-  const { error, data } = useSubscription(MESSAGES);
-
+  // const { signIn } = useAuth();
+  const onCompleted = (d) => {
+    const { token } = d.createUser;
+    login({ token });
+  };
+  const [createUser, { data }] = useMutation(CREATE_USER, { onCompleted });
   const [user, setUser] = useState("");
+  const [inputVals, setInputVals] = useState({
+    name: "",
+    password: "",
+  });
+
+  const submit = (e) => {
+    e.preventDefault();
+    createUser({ variables: { input: inputVals } });
+  };
 
   return (
     <Context.Provider value={{ user, setUser }}>
       <StyledHome>
-        <div className="main">
+        <form onSubmit={submit}>
+          <input
+            value={inputVals.name}
+            onChange={(e) =>
+              setInputVals({ ...inputVals, name: e.target.value })
+            }
+          />
+          <input
+            value={inputVals.password}
+            onChange={(e) =>
+              setInputVals({ ...inputVals, password: e.target.value })
+            }
+          />
+          <button type="submit">CLICK ME</button>
+        </form>
+        {/* <div className="main">
           <div className="header">
             {user ? `Hello ${user}` : "Please Enter Name To Begin"}
           </div>
@@ -24,7 +55,7 @@ function Home() {
           {user && <ChatBox error={error} data={data} />}
           {!user && <SignInInput />}
           </div>
-        </div>
+        </div> */}
       </StyledHome>
     </Context.Provider>
   );

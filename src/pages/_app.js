@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "styles/theme";
+import { WithAuthSync } from "../components/utils/AuthProvider";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -8,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: ${({ theme }) => theme.fontFamily.body};
-    background: ${({theme}) => theme.colors.purple};
+    background: ${({ theme }) => theme.colors.purple};
   }
 `;
 
@@ -24,7 +25,9 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Component {...pageProps} />
+        <WithAuthSync>
+          <Component {...pageProps} />
+        </WithAuthSync>
       </ThemeProvider>
     </>
   );
