@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Context } from "../../pages/index";
+import { Context } from "../../pages/_app";
 import styled from "styled-components";
 import Input from "../Input";
 import Button from "../Button";

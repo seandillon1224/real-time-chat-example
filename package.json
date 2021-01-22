@@ -27,6 +27,7 @@
     "subscriptions-transport-ws": "^0.9.18"
   },
   "devDependencies": {
-    "babel-plugin-module-resolver": "^4.0.0"
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-styled-components": "^1.12.0"
   }
 }

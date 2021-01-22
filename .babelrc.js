@@ -1,11 +1,7 @@
 module.exports = {
-    "presets": [
-      "next/babel"
-    ],
-    "plugins": [
-      ["module-resolver", {
-        "root": ["./src"]
-      }],
-    ],
-  }
-  
+  presets: ["next/babel"],
+  plugins: [
+    ["styled-components", { ssr: true }],
+    ["module-resolver", { root: ["./src"] }],
+  ],
+};

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { CREATE_MESSAGE } from "../../graphql/mutations";
 import { useMutation } from "@apollo/react-hooks";
-import { Context } from "../../pages";
+import { Context } from "../../pages/_app";
 import Input from "../Input";
 import Button from "../Button";
 

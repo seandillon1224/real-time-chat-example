@@ -1,7 +1,9 @@
+import * as React from "react";
 import Head from "next/head";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "styles/theme";
 import { WithAuthSync } from "../components/utils/AuthProvider";
+import StyledHome from "../styles/home";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -13,7 +15,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+export const Context = React.createContext({});
+
 function MyApp({ Component, pageProps }) {
+  const [user, setUser] = React.useState("");
+
   return (
     <>
       <Head>
@@ -26,7 +32,11 @@ function MyApp({ Component, pageProps }) {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <WithAuthSync>
-          <Component {...pageProps} />
+          <StyledHome>
+            <Context.Provider value={{ user, setUser }}>
+              <Component {...pageProps} />
+            </Context.Provider>
+          </StyledHome>
         </WithAuthSync>
       </ThemeProvider>
     </>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Context } from "../../pages";
+import { Context } from "../../pages/_app";
 import StyledChatBubble from "./StyledChatBubble";
 
 const ChatBubble = ({ user, message }) => {

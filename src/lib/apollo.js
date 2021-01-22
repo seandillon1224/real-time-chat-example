@@ -18,6 +18,7 @@ const wsLink = process.browser
 const authLink = setContext((req, { headers }) => {
   // return the headers to the context so httpLink can read them
   const { token } = nextCookie(req);
+  console.log("here", token);
   return {
     headers: {
       ...headers,
